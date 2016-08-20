@@ -1,0 +1,144 @@
+archer:
+  helmet:
+    type: LEATHER_HELMET
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 1
+      DURABILITY: 3
+  chest:
+    type: LEATHER_CHESTPLATE
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 1
+      DURABILITY: 3
+  legs:
+    type: LEATHER_LEGGINGS
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 1
+      DURABILITY: 3
+  boots:
+    type: LEATHER_BOOTS
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 1
+      DURABILITY: 3
+      PROTECTION_FALL: 4
+  inv:
+    0: 
+      type: BOW
+      enchantments:
+        ARROW_DAMAGE: 4
+        ARROW_FIRE: 1
+        ARROW_INFINITE: 1
+    1:
+      type: ENDER_PEARL
+      amount: 16
+    2:
+      type: SUGAR
+      amount: 32
+    3: 
+      type: POTION
+      durability: 8259
+    8: 
+      type: COOKED_BEEF
+      amount: 64
+    17:
+      type: ARROW
+
+
+diamond:
+  helmet:
+    type: DIAMOND_HELMET
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 1
+      DURABILITY: 3
+  chest:
+    type: DIAMOND_CHESTPLATE
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 1
+      DURABILITY: 3
+  legs:
+    type: DIAMOND_LEGGINGS
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 1
+      DURABILITY: 3
+  boots:
+    type: DIAMOND_BOOTS
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 1
+      DURABILITY: 3
+      PROTECTION_FALL: 4
+  inv:
+    0: 
+      type: DIAMOND_SWORD
+      enchantments:
+        DAMAGE_ALL: 1
+        DURABILITY: 3
+    1:
+      type: ENDER_PEARL
+      amount: 16
+    2: 
+      type: POTION
+      durability: 8259
+    3: 
+      type: POTION
+      durability: 8226
+    8: 
+      type: COOKED_BEEF
+      amount: 64
+    17:
+      type: POTION
+      durability: 8226
+    26:
+      type: POTION
+      durability: 8226
+    35:
+      type: POTION
+      durability: 8226
+      
+bard:
+  helmet:
+    type: GOLD_HELMET
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 1
+      DURABILITY: 3
+  chest:
+    type: GOLD_CHESTPLATE
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 1
+      DURABILITY: 3
+  legs:
+    type: GOLD_LEGGINGS
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 1
+      DURABILITY: 3
+  boots:
+    type: GOLD_BOOTS
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 1
+      DURABILITY: 3
+      PROTECTION_FALL: 4
+  inv:
+    0: 
+      type: DIAMOND_SWORD
+      enchantments:
+        DAMAGE_ALL: 1
+        DURABILITY: 3
+    1:
+      type: ENDER_PEARL
+      amount: 16
+    2: 
+      type: POTION
+      durability: 8259
+    4:
+      type: BLAZE_POWDER
+      amount: 32
+    5:
+      type: SUGAR
+      amount: 32
+    6:
+      type: FEATHER
+      amount: 32
+    7:
+      type: IRON_INGOT
+      amount: 32
+    8: 
+      type: COOKED_BEEF
+      amount: 64

@@ -1,0 +1,5 @@
+name: KitMap
+main: org.ipvp.kitmap.KitMapPlugin
+version: ${project.version}
+description: ${project.description}
+authors: [ SainttX ]
