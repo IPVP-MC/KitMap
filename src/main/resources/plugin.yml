@@ -1,5 +1,5 @@
-name: KitMap
-main: org.ipvp.kitmap.KitMapPlugin
+name: KitSigns
+main: org.ipvp.kitmap.KitSignsPlugin
 version: ${project.version}
 description: ${project.description}
 authors: [ SainttX ]

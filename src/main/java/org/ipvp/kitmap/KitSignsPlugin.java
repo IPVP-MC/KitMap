@@ -19,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class KitMapPlugin extends JavaPlugin implements Listener {
+public class KitSignsPlugin extends JavaPlugin implements Listener {
 
     private Map<UUID, Long> nextClick = new HashMap<>();
     private Map<String, Kit> kits = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);

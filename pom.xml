@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ipvp</groupId>
-    <artifactId>kitmap</artifactId>
+    <artifactId>kitsigns</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
-    <name>KitMap</name>
+    <name>KitSigns</name>
     <description>Give players items from signs they click</description>
 
     <build>
