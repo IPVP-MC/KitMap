@@ -1,5 +1,6 @@
 package org.ipvp.kitmap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -15,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.ipvp.kitmap.event.PlayerInteractKitSignEvent;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -112,6 +114,13 @@ public class KitSignsPlugin extends JavaPlugin implements Listener {
                         return;
                     }
                 }
+
+                PlayerInteractKitSignEvent event1 = new PlayerInteractKitSignEvent(player, sign);
+                Bukkit.getPluginManager().callEvent(event1);
+                if (event1.isCancelled()) {
+                    return;
+                }
+
                 this.nextClick.put(player.getUniqueId(), System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(1));
                 String clazz = sign.getLine(1).toLowerCase();
                 if (!kits.containsKey(clazz)) {
