@@ -69,6 +69,5 @@ public class Kit {
         while (inventory.firstEmpty() != -1) {
             inventory.addItem(SPLASH_HEATH.clone());
         }
-        player.updateInventory();
     }
 }

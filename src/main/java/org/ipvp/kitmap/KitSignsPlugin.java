@@ -127,12 +127,15 @@ public class KitSignsPlugin extends JavaPlugin implements Listener {
                     player.sendMessage(ChatColor.RED + "Improper kit defined, please contact an administrator.");
                 } else {
                     Kit kit = kits.get(clazz);
-                    kit.giveTo(player);
-                    player.setHealth(20.0D);
-                    player.setFireTicks(0);
-                    player.setFoodLevel(20);
-                    player.setSaturation(20.0F);
-                    player.sendMessage(ChatColor.GREEN + "Inventory updated with kit " + clazz);
+                    getServer().getScheduler().runTask(this, () -> {
+                        kit.giveTo(player);
+                        player.setHealth(20.0D);
+                        player.setFireTicks(0);
+                        player.setFoodLevel(20);
+                        player.setSaturation(20.0F);
+                        getServer().getScheduler().runTaskLater(this, player::updateInventory, 2L);
+                        player.sendMessage(ChatColor.GREEN + "Inventory updated with kit " + clazz);
+                    });
                 }
             }
         }
