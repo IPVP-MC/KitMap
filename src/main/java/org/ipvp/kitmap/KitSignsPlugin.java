@@ -40,7 +40,7 @@ public class KitSignsPlugin extends JavaPlugin implements Listener {
         }
         for (String key : keys) {
             ConfigurationSection section = getConfig().getConfigurationSection(key);
-            Kit kit = new Kit();
+            Kit kit = new Kit(section.getBoolean("potions", true));
             kit.setHelmet(loadItem(section.getConfigurationSection("helmet")));
             kit.setChest(loadItem(section.getConfigurationSection("chest")));
             kit.setLegs(loadItem(section.getConfigurationSection("legs")));

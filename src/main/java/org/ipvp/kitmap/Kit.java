@@ -7,10 +7,16 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class Kit {
 
+    private static final ItemStack SPLASH_HEATH = new ItemStack(Material.POTION, 1, (short) 16421);
+
     private ItemStack helmet, chest, legs, boots;
     private ItemStack[] contents = new ItemStack[36];
-    
-    private static final ItemStack SPLASH_HEATH = new ItemStack(Material.POTION, 1, (short) 16421);
+
+    private boolean potions;
+
+    public Kit(boolean potions) {
+        this.potions = potions;
+    }
 
     public ItemStack getHelmet() {
         return helmet;
@@ -66,7 +72,7 @@ public class Kit {
             ItemStack item = contents[i];
             inventory.setItem(i, item == null ? null : item.clone());
         }
-        while (inventory.firstEmpty() != -1) {
+        while (potions && inventory.firstEmpty() != -1) {
             inventory.addItem(SPLASH_HEATH.clone());
         }
     }
