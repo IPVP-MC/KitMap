@@ -16,7 +16,7 @@ kit_name:
 ```
 `<index>` in the `inv` node corresponds to an inventory slot number (`Integer`) inside a players inventory. 
 
-##### ItemStack #####
+### ItemStack ###
 ItemStack definitions in the configuration must have the following format:
 ```yaml
 node:
