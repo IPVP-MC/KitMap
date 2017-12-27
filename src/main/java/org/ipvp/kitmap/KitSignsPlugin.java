@@ -57,7 +57,10 @@ public class KitSignsPlugin extends JavaPlugin implements Listener {
                         continue;
                     }
                     ConfigurationSection item = inv.getConfigurationSection(index);
-                    kit.addItem(idx, loadItem(item));
+                    ItemStack itm = loadItem(item);
+                    if (itm != null) {
+                        kit.addItem(idx, itm);
+                    }
                 }
             }
             kits.put(key, kit);
