@@ -121,6 +121,7 @@ public class KitSignsPlugin extends JavaPlugin implements Listener {
             List<String> lore = item.getItemMeta().getLore();
 
             if (lore.get(0).equals(ChatColor.DARK_BLUE + "[Class]")) {
+                event.setCancelled(true);
                 if (nextClick.containsKey(player.getUniqueId())) {
                     long nextClick = this.nextClick.get(player.getUniqueId());
                     if (System.currentTimeMillis() < nextClick) {
@@ -136,9 +137,7 @@ public class KitSignsPlugin extends JavaPlugin implements Listener {
 
                 this.nextClick.put(player.getUniqueId(), System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(1));
                 String clazz = lore.get(1).toLowerCase();
-                if (giveKit(player, clazz)) {
-                    event.setCancelled(true);
-                }
+                giveKit(player, clazz);
             }
         }
     }
