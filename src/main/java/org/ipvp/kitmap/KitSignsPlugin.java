@@ -7,11 +7,14 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -102,6 +105,64 @@ public class KitSignsPlugin extends JavaPlugin implements Listener {
     }
 
     @EventHandler
+    public void onItemFrameUse(PlayerInteractEntityEvent event) {
+        Player player = event.getPlayer();
+        Entity entity = event.getRightClicked();
+
+        if (entity instanceof ItemFrame) {
+            ItemFrame frame = (ItemFrame) entity;
+            ItemStack item = frame.getItem();
+
+            if (item == null || !item.hasItemMeta() || !item.getItemMeta().hasLore()
+                || item.getItemMeta().getLore().size() < 2) {
+                return;
+            }
+
+            List<String> lore = item.getItemMeta().getLore();
+
+            if (lore.get(0).equals(ChatColor.DARK_BLUE + "[Class]")) {
+                if (nextClick.containsKey(player.getUniqueId())) {
+                    long nextClick = this.nextClick.get(player.getUniqueId());
+                    if (System.currentTimeMillis() < nextClick) {
+                        return;
+                    }
+                }
+
+                PlayerInteractKitSignEvent event1 = new PlayerInteractKitSignEvent(player, frame);
+                Bukkit.getPluginManager().callEvent(event1);
+                if (event1.isCancelled()) {
+                    return;
+                }
+
+                this.nextClick.put(player.getUniqueId(), System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(1));
+                String clazz = lore.get(1).toLowerCase();
+                if (giveKit(player, clazz)) {
+                    event.setCancelled(true);
+                }
+            }
+        }
+    }
+
+    private boolean giveKit(Player player, String clazz) {
+        if (!kits.containsKey(clazz)) {
+            player.sendMessage(ChatColor.RED + "Improper kit defined, please contact an administrator.");
+            return false;
+        } else {
+            Kit kit = kits.get(clazz);
+            getServer().getScheduler().runTask(this, () -> {
+                kit.giveTo(player);
+                player.setHealth(20.0D);
+                player.setFireTicks(0);
+                player.setFoodLevel(20);
+                player.setSaturation(20.0F);
+                getServer().getScheduler().runTaskLater(this, player::updateInventory, 2L);
+                player.sendMessage(ChatColor.GREEN + "Inventory updated with kit " + clazz);
+            });
+            return true;
+        }
+    }
+
+    @EventHandler
     public void onSignUse(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
@@ -126,20 +187,7 @@ public class KitSignsPlugin extends JavaPlugin implements Listener {
 
                 this.nextClick.put(player.getUniqueId(), System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(1));
                 String clazz = sign.getLine(1).toLowerCase();
-                if (!kits.containsKey(clazz)) {
-                    player.sendMessage(ChatColor.RED + "Improper kit defined, please contact an administrator.");
-                } else {
-                    Kit kit = kits.get(clazz);
-                    getServer().getScheduler().runTask(this, () -> {
-                        kit.giveTo(player);
-                        player.setHealth(20.0D);
-                        player.setFireTicks(0);
-                        player.setFoodLevel(20);
-                        player.setSaturation(20.0F);
-                        getServer().getScheduler().runTaskLater(this, player::updateInventory, 2L);
-                        player.sendMessage(ChatColor.GREEN + "Inventory updated with kit " + clazz);
-                    });
-                }
+                giveKit(player, clazz);
             }
         }
     }
